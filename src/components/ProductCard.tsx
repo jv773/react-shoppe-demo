@@ -3,13 +3,16 @@ import {
   Card,
   Button,
 } from 'react-bootstrap';
+import { addToCart, CartDispatch } from '../actions/cart';
 import { Product } from '../types/product';
+import { useDispatch } from 'react-redux'
 
 type Props = {
   product: Product
 };
 
-const ProductCard = ({ product }: Props) => {  
+const ProductCard: React.FC<Props> = ({ product }) => {  
+  const dispatch = useDispatch<CartDispatch>();
   return(
     <Card>
       <div style={{backgroundImage: `url(${product.image})`}} className="product-image"></div>
@@ -19,7 +22,7 @@ const ProductCard = ({ product }: Props) => {
           {product.description}
         </Card.Text>
         <span className="price">${product.price} {product.unit}</span>
-        <Button className="cart-button" variant="outline-primary" onClick={() => {}}>Add to Cart</Button>
+        <Button className="cart-button" variant="outline-primary" onClick={() => dispatch(addToCart(product))}>Add to Cart</Button>
       </Card.Body>
     </Card>
   );
