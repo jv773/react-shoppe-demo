@@ -3,10 +3,10 @@ import {
   Card,
   Button,
 } from 'react-bootstrap';
-import { AppDispatch } from '../actions';
+import { AppDispatch } from '../store';
 import { addToCart } from '../actions/cart';
 import { Product } from '../types/product';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
 type Props = {
   product: Product

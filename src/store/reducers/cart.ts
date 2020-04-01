@@ -11,8 +11,19 @@ const productsReducer = (state: Product[] = [], action: AppActions): Product[] =
   switch(action.type) {
     case CartTypes.AddToCart:
       return [...state, action.product].sort(sortByTitle);
-      case CartTypes.RemoveFromCart:
-        return state.filter((_, index) => index !== action.index)
+    case CartTypes.RemoveFromCart:
+      return state.filter((_, index) => index !== action.index);
+    case CartTypes.CompletePurchase:
+      return [];
+    default:
+      return state;
+  }
+}
+
+const checkoutReducer = (state: Product[] = [], action: AppActions): Product[] => {
+  switch(action.type) {
+    case CartTypes.CompletePurchase:
+      return action.purchasedProducts;
     default:
       return state;
   }
@@ -20,6 +31,7 @@ const productsReducer = (state: Product[] = [], action: AppActions): Product[] =
 
 const cartReducer = combineReducers({
    products: productsReducer,
+   purchasedProducts: checkoutReducer,
 })
 
 export default cartReducer;
